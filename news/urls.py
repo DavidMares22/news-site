@@ -3,5 +3,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('',index)
+    path('',index,name='home'),
+    path('category/<int:id>',get_category,name='detail')
 ]

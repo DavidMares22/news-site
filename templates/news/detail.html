@@ -13,7 +13,6 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    
     <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +57,7 @@
 
       </div>
       <div class="col-sm-8">
-        {% for item in items %}
+        {% for item in news %}
         <div class="card">
 
           <div class="card-header">
@@ -91,32 +90,14 @@
 
 
 
-
-        <!-- <h2>TITLE HEADING</h2>
-            <h5>Title description, Dec 7, 2017</h5>
-            <div class="fakeimg">Fake Image</div>
-            <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-            <br> -->
+ 
 
       </div>
     </div>
   </div>
 
 
-
-  <!-- <h1>Index page</h1>
-
-    {% for item in items %}
-
-        <p>{{item.title}}</p>
-        <p>{{item.content}}</p>
-        <p>{{item.created_at |date:"d-m-Y H:i"}}</p>
-
-
-
-    {% endfor %} -->
-
+ 
 
   <script src="{% static 'news/js/jquery.min.js' %}"></script>
   <script src="{% static 'news/js/bootstrap.min.js' %}"></script>

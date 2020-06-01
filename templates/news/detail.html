@@ -1,62 +1,20 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="{% static 'news/css/my_style.css' %}" rel="stylesheet">
-  <link href="{% static 'news/css/bootstrap.min.css' %}" rel="stylesheet">
-</head>
-
-<body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-
-    </div>
-  </nav>
-
-
-  <div class="container" style="margin-top:30px">
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="list-group">
-
-          {% for c in categories %}
-          
-          <a href="{% url 'detail' c.id %}" class="list-group-item list-group-item-action">   {{c}}</a>
-
-       
+{% extends 'news/base.html' %}
 
 
 
-          {% endfor %}
 
-        </div>
+{% block title %}
+<title>{{category}}</title>
+{% endblock title %}
+
+ 
 
 
-      </div>
-      <div class="col-sm-8">
+{% block content %}
+
+
+
+      
         {% for item in news %}
         <div class="card">
 
@@ -69,7 +27,7 @@
               <div class="media-body">
                 <img src="{{ item.photo.url}}" alt="" width="350" class="mx-auto d-block">
                 <h5 class="card-title">{{item.title}}</h5>
-                <p class="card-text">{{item.content}}</p>
+                <p class="card-text">{{item.content | truncatewords:50}}</p>
                 <a href="#" class="btn btn-primary">Read More</a>
               </div>
             </div>
@@ -82,25 +40,8 @@
         </br>
         {% endfor %}
 
+{% endblock content %}
 
 
 
-
-
-
-
-
- 
-
-      </div>
-    </div>
-  </div>
-
-
- 
-
-  <script src="{% static 'news/js/jquery.min.js' %}"></script>
-  <script src="{% static 'news/js/bootstrap.min.js' %}"></script>
-</body>
-
-</html>
+  

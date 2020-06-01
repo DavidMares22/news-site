@@ -1,0 +1,14 @@
+
+      {% load news_tags %}
+
+      {% get_categories as categorias %}
+      
+      <div class="list-group">
+
+        {% for c in categorias %}
+        <a href="{% url 'detail' c.id %}" class="list-group-item list-group-item-action"> {{c}} {{c.news_set.count}}
+        </a>
+        {% endfor %}
+
+      </div>
+

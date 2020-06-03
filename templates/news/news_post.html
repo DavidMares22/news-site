@@ -1,0 +1,39 @@
+{% extends 'news/base.html' %}
+
+
+{% block title %}
+<title>{{news_post}}</title>
+{% endblock title %}
+
+
+
+
+{% block content %}
+
+ 
+<div class="card">
+
+  <div class="card-header">
+    Category: <a href="{{news_post.category.get_absolute_url}}">{{news_post.category}}</a>
+  </div>
+
+  <div class="card-body">
+    <div class="media">
+      <div class="media-body">
+        <img src="{{ news_post.photo.url}}" alt="" width="350" class="mx-auto d-block">
+        <h5 class="card-title">{{news_post.title}}</h5>
+        <p class="card-text">{{news_post.content}}</p>
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="card-footer">
+    {{news_post.created_at |date:"d-m-Y H:i"}}
+  </div>
+</div>
+</br>
+ 
+
+{% endblock content %}
+

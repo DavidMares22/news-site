@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 
 
@@ -17,7 +19,13 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
-    
+ 
+
+@receiver(post_delete, sender=News)
+def submission_delete(sender, instance, **kwargs):
+    instance.photo.delete() 
+    # instance.photo.delete(False) for filefield
+
 
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True)

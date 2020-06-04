@@ -22,7 +22,7 @@
       <div class="media-body">
         <img src="{{ news_post.photo.url}}" alt="" width="350" class="mx-auto d-block">
         <h5 class="card-title">{{news_post.title}}</h5>
-        <p class="card-text">{{news_post.content}}</p>
+        <p class="card-text">{{news_post.content | linebreaks}}</p>
         
       </div>
     </div>

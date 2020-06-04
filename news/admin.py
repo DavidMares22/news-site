@@ -4,9 +4,14 @@ from .models import Category
 # Register your models here.
 
 
+
+    
+
+
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'category','is_published')
     list_editable = ('is_published',)
+    
 
 
 class CategoryAdmin(admin.ModelAdmin):

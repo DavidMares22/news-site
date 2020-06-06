@@ -24,13 +24,15 @@ def news_post(request,id):
     return render(request,'news/news_post.html',{'news_post':news_post})
 
 def add_post(request):
-
     if request.method == 'POST':
-        form = NewsForm(request.POST,request.FILES)
-        
+        form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            cd = form.cleaned_data
+            n = News(title=cd['title'],content=cd['content'],is_published=cd['is_published'],photo=cd['photo'],category=cd['category'])
+            n.save()
             return redirect('home')
-
-    form = NewsForm()
-    return render(request,'news/add_post.html',{'form':form})
+        else:
+            print(form.errors)
+    else:
+        form = NewsForm()
+    return render(request, 'news/add_post.html', {'form': form})

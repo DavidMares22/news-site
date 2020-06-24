@@ -6,7 +6,10 @@
       <div class="list-group">
 
         {% for c in categorias %}
-        <a href="{% url 'category' c.id %}" class="list-group-item list-group-item-action"> {{c}} {{c.news_set.count}}
+        {% comment %} <a href="{% url 'category' c.id %}" class="list-group-item list-group-item-action"> {{c}} {{c.news_set.count}}
+        </a> {% endcomment %}
+
+        <a href="{% url 'category' c.id %}" class="list-group-item list-group-item-action"> {{c}} <span class="badge badge-primary badge-pill">{{ c.cnt }}</span>
         </a>
         {% endfor %}
 

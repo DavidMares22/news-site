@@ -9,8 +9,10 @@
 
 
 {% block content %}
+ {{page_obj}}
+ {{page_obj.number}}
 
-{% for item in news %}
+{% for item in page_obj %}
 <div class="card">
 
   <div class="card-header">
@@ -34,6 +36,10 @@
 </div>
 </br>
 {% endfor %}
+
+
+
+
 
 {% endblock content %}
 

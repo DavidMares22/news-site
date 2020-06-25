@@ -3,12 +3,18 @@ from django.http import HttpResponse
 from .models import News,Category
 
 from .forms import NewsForm
+from django.core.paginator import Paginator
 
 
 
 def index(request):
     news = News.objects.all()
-    return render(request,'news/index.html',{'news':news})
+    paginator = Paginator(news, 2)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # print(request.user)
+    return render(request,'news/index.html',{'page_obj':page_obj})
 
 
 def get_category(request,id):

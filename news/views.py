@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponse
 from .models import News,Category
 
-from .forms import NewsForm
+from .forms import NewsForm,RegisterForm
 from django.core.paginator import Paginator
+from django.contrib import messages
+
 
 
 
@@ -42,3 +44,18 @@ def add_post(request):
     else:
         form = NewsForm()
     return render(request, 'news/add_post.html', {'form': form})
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Account succesfully created')
+            return redirect('home')
+        else:
+            messages.error(request,'An error ocurred')
+    else:
+        form = RegisterForm()
+    return render(request,'news/register.html',{'form':form})

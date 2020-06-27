@@ -22,9 +22,13 @@ def index(request):
 def get_category(request,id):
     
     news = News.objects.filter(category_id = id)
+    paginator = Paginator(news, 2)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     # category = Category.objects.get(pk=id)
     category = get_object_or_404(Category, pk=id)
-    return render(request,'news/detail.html',{'category':category,'news':news})
+    return render(request,'news/detail.html',{'category':category,'page_obj':page_obj})
 
 def news_post(request,id):
     # news_post = News.objects.get(pk = id)

@@ -16,6 +16,12 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username','email','password1','password2']
 
+    def clean_email(self):
+            data = self.cleaned_data['email']
+            if User.objects.filter(email=data).count() > 0:
+                raise forms.ValidationError("We have a user with this user email-id")
+            return data
+
 
 class NewsForm(forms.Form):
     title = forms.CharField(max_length=150, widget=forms.TextInput(attrs={"class": "form-control"}))

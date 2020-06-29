@@ -6,6 +6,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 
+class ContactForm(forms.Form):
+    subject = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))    
+    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control','rows':5}))    
+
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

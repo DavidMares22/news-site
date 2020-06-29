@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponse
 from .models import News,Category
 
-from .forms import NewsForm,RegisterForm, UserLoginForm
+from .forms import *
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import login as do_login
 from django.contrib.auth import authenticate
 from django.contrib.auth import logout as do_logout
-
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -87,3 +87,20 @@ def login(request):
 def logout(request):
     do_logout(request)
     return redirect('login')
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(form.cleaned_data['subject'],form.cleaned_data['content'],'damr18@gmail.com',['damr18@gmail.com'],fail_silently=True)
+            
+            if mail:
+                messages.success(request,'mail sent!')
+            else:
+                messages.error(request,'there was an error')
+        else:
+            messages.error(request,'there was an error')
+    else:
+        form = ContactForm()
+    return render(request,'news/contact.html',{'form':form})

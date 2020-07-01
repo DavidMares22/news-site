@@ -68,7 +68,7 @@ def register(request):
 
 
 def login(request):
-    form = UserLoginForm()
+    
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -79,6 +79,12 @@ def login(request):
             if user is not None:
                 do_login(request, user)       
                 return redirect('home')
+
+            else:
+                messages.error(request,'username or password not correct')
+                return redirect('login')
+    else:
+        form = UserLoginForm()
 
     return render(request,'news/login.html',{'form':form})
 
@@ -98,9 +104,9 @@ def contact_us(request):
             if mail:
                 messages.success(request,'mail sent!')
             else:
-                messages.error(request,'there was an error')
+                messages.error(request,'there was an error sending the mail')
         else:
-            messages.error(request,'there was an error')
+            messages.error(request,'validation error')
     else:
         form = ContactForm()
     return render(request,'news/contact.html',{'form':form})
